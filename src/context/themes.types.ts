@@ -48,7 +48,6 @@ export interface ThemeContextType {
 export interface ThemeProviderProps {
   children: React.ReactNode;
 }*/
-// src/context/themes.types.ts
 export const THEME_KEY = "theme";
 
 export const THEMES = {
@@ -56,12 +55,23 @@ export const THEMES = {
   DARK: "dark",
 } as const;
 
-export type Theme = typeof THEMES[keyof typeof THEMES];
+export type ThemeMode = typeof THEMES[keyof typeof THEMES]; // "light" | "dark"
+
+export interface Theme {
+  mode: ThemeMode;
+  colors: {
+    primary: string;
+    secondary: string;
+    neutral: string;
+    contrast: string;
+  };
+}
 
 export interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
-  setTheme: (theme: Theme) => void;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  setClubTheme: (clubId: string) => void;
 }
 
 export interface ThemeProviderProps {
