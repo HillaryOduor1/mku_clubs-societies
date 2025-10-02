@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand: #3B82F6;
+  --complementary: #9333EA;
+  --neutral: #F9FAFB;
+  --contrast: #111827;
+}
+
+.bg-brand {
+  background-color: var(--brand);
+}
+.text-brand {
+  color: var(--brand);
+}
+.bg-neutral {
+  background-color: var(--neutral);
+}
+.text-contrast {
+  color: var(--contrast);
+}
+
 /* Smooth theme transitions for all elements */
 * {
   transition-property: background-color, border-color, color, fill, stroke;

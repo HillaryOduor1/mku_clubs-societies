@@ -68,6 +68,7 @@ const ClubDetail: React.FC = () => {
 };
 
 export default ClubDetail;*/
+/*
 import { useParams, Link, Outlet } from "react-router-dom";
 import { clubs } from "../data/clubsData";
 import { Club } from "../types/club";
@@ -90,7 +91,7 @@ const ClubDetail: React.FC = () => {
       <h1 className="text-2xl font-bold mb-2">{club.name}</h1>
       <p className="mb-4">{club.description}</p>
 
-      {/* Sub-navigation for nested routes */}
+      {/* Sub-navigation for nested routes /}
       <nav className="flex gap-4 mb-6">
         <Link to="about" className="text-blue-600 hover:underline">
           About
@@ -103,10 +104,10 @@ const ClubDetail: React.FC = () => {
         </Link>
       </nav>
 
-      {/* Nested content */}
+      {/* Nested content /}
       <Outlet />
     </div>
   );
 };
 
-export default ClubDetail;
+export default ClubDetail;*/

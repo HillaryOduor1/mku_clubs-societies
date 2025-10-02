@@ -31,6 +31,7 @@ const Home = () => {
 };
 
 export default Home;*/
+/*
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -85,7 +86,7 @@ const Home: React.FC = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background */}
+      {/* Background /}
       {hasImage ? (
         <img
           src={slide.image}
@@ -96,10 +97,10 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500" />
       )}
 
-      {/* Overlay */}
+      {/* Overlay /}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Content */}
+      {/* Content /}
       <div className="relative z-10 max-w-2xl px-4">
         <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-6">
           {slide.text}
@@ -112,7 +113,7 @@ const Home: React.FC = () => {
         </button>
       </div>
 
-      {/* Controls */}
+      {/* Controls /}
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
@@ -131,4 +132,131 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Home;*
+import * as React from "react";
+import { useParams } from "react-router-dom";
+import { getClubById } from "../data/clubsData";
+import Layout from "../components/Layout";
+
+export default function Home() {
+  const { clubId } = useParams<{ clubId: string }>();
+  const club = clubId ? getClubById(clubId) : null;
+
+  if (!club) {
+    return React.createElement(
+      "div",
+      { className: "container mx-auto px-4 py-8" },
+      React.createElement(
+        "h1",
+        { className: "text-2xl font-bold text-red-600" },
+        "Club not found"
+      )
+    );
+  }
+
+  return React.createElement(
+    Layout,
+    { clubId: club.id },
+    club.hero ? React.createElement(
+      "section",
+      { className: "bg-blue-600 text-white" },
+      React.createElement(
+        "div",
+        { className: "container mx-auto px-4 py-20 text-center" },
+        React.createElement(
+          "h1",
+          { className: "text-4xl font-bold mb-4" },
+          club.hero.title
+        ),
+        React.createElement(
+          "p",
+          { className: "text-xl mb-8" },
+          club.hero.subtitle
+        ),
+        React.createElement(
+          "button",
+          {
+            className: "bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+          },
+          "Join Our Club"
+        )
+      )
+    ) : null,
+    React.createElement(
+      "section",
+      { className: "container mx-auto px-4 py-12" },
+      React.createElement(
+        "div",
+        { className: "text-center mb-12" },
+        React.createElement(
+          "h2",
+          { className: "text-3xl font-bold mb-4" },
+          "Welcome to ",
+          club.name
+        ),
+        React.createElement(
+          "p",
+          { className: "text-gray-600 max-w-2xl mx-auto" },
+          club.description
+        )
+      )
+    )
+  );
+}*/
+import * as React from "react";
+import { useParams } from "react-router-dom";
+import { getClubById } from "../data/clubsData";
+import Layout from "../components/Layout";
+
+export default function Home() {
+  const { clubId } = useParams<{ clubId: string }>();
+  const club = clubId ? getClubById(clubId) : null;
+
+  if (!club) {
+    return (
+      <div className="grid place-items-center min-h-screen bg-white dark:bg-gray-900 px-4">
+        <h1 className="text-2xl font-bold text-red-600 dark:text-red-400">
+          Club not found
+        </h1>
+      </div>
+    );
+  }
+
+  return (
+    <Layout clubId={club.id}>
+      {/* Hero Section */}
+      {club.hero && (
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 dark:from-blue-800 dark:via-blue-900 dark:to-gray-900" />
+          <div className="relative container mx-auto px-4 py-24 text-center grid gap-6">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-sm">
+              {club.hero.title}
+            </h1>
+            <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+              {club.hero.subtitle}
+            </p>
+            <div>
+              <button
+                className="px-6 py-3 rounded-xl bg-white text-blue-700 font-semibold shadow-md hover:shadow-lg hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-gray-100 dark:text-blue-900 dark:hover:bg-gray-200 transition-all duration-300"
+              >
+                Join Our Club
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* About Section */}
+      <section className="container mx-auto px-4 py-16 bg-white dark:bg-gray-900">
+        <div className="grid gap-8 text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            Welcome to {club.name}
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            {club.description}
+          </p>
+        </div>
+      </section>
+    </Layout>
+  );
+}
