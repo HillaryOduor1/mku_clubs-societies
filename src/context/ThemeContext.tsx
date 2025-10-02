@@ -48,6 +48,7 @@ export const useThemeContext = (): ThemeContextType => {
   if (!context) throw new Error("useTheme must be used within ThemeProvider");
   return context;
 };*/
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
   THEMES,
@@ -120,4 +121,44 @@ export const useThemeContext = (): ThemeContextType => {
   if (!context) throw new Error("useTheme must be used within ThemeProvider");
   return context;
 };
+/*import React, { createContext, useState, useContext, useEffect } from "react";
+import { Theme, ThemeContextType, ThemeProviderProps, THEMES, THEME_KEY } from "./themes.types";
+
+export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+  const [theme, setTheme] = useState<Theme>(THEMES.LIGHT);
+
+  // Load saved theme from localStorage
+  useEffect(() => {
+    const storedTheme = localStorage.getItem(THEME_KEY) as Theme | null;
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
+
+  // Save theme to localStorage
+  useEffect(() => {
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+      <div className={theme === THEMES.LIGHT ? "bg-white text-black" : "bg-gray-900 text-white"}>
+        {children}
+      </div>
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = (): ThemeContextType => {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error("useTheme must be used within a ThemeProvider");
+  return context;
+};*/
+
 
